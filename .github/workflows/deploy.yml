@@ -1,0 +1,18 @@
+name: Deploy to assos1
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: oven-sh/setup-bun@v1
+    - run: bun install
+    - run: bun run build
+    - uses: nwtgck/actions-netlify@v3
+      with:
+        publish-dir: out
+      env:
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
