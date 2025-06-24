@@ -1,0 +1,240 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 9 9 11;
+  --foreground: 250 250 250;
+  --card: 9 9 11;
+  --card-foreground: 250 250 250;
+  --popover: 9 9 11;
+  --popover-foreground: 250 250 250;
+  --primary: 250 250 250;
+  --primary-foreground: 9 9 11;
+  --secondary: 39 39 42;
+  --secondary-foreground: 250 250 250;
+  --muted: 39 39 42;
+  --muted-foreground: 161 161 170;
+  --accent: 39 39 42;
+  --accent-foreground: 250 250 250;
+  --destructive: 239 68 68;
+  --destructive-foreground: 250 250 250;
+  --border: 39 39 42;
+  --input: 39 39 42;
+  --ring: 212 212 216;
+  --chart-1: 220 70 50;
+  --chart-2: 160 60 50;
+  --chart-3: 30 80 55;
+  --chart-4: 280 65 60;
+  --chart-5: 340 75 55;
+  --radius: 0.5rem;
+
+  /* Custom theme transition duration */
+  --theme-transition-duration: 0.3s;
+  --theme-transition-timing: ease-in-out;
+}
+
+/* Light theme variables */
+.light {
+  --background: 255 255 255;
+  --foreground: 9 9 11;
+  --card: 255 255 255;
+  --card-foreground: 9 9 11;
+  --popover: 255 255 255;
+  --popover-foreground: 9 9 11;
+  --primary: 24 24 27;
+  --primary-foreground: 250 250 250;
+  --secondary: 244 244 245;
+  --secondary-foreground: 24 24 27;
+  --muted: 244 244 245;
+  --muted-foreground: 113 113 122;
+  --accent: 244 244 245;
+  --accent-foreground: 24 24 27;
+  --destructive: 239 68 68;
+  --destructive-foreground: 250 250 250;
+  --border: 228 228 231;
+  --input: 228 228 231;
+  --ring: 24 24 27;
+  --chart-1: 220 70 50;
+  --chart-2: 160 60 50;
+  --chart-3: 30 80 55;
+  --chart-4: 280 65 60;
+  --chart-5: 340 75 55;
+}
+
+/* Global smooth transitions for theme switching */
+*,
+*::before,
+*::after {
+  transition:
+    background-color var(--theme-transition-duration) var(--theme-transition-timing),
+    color var(--theme-transition-duration) var(--theme-transition-timing),
+    border-color var(--theme-transition-duration) var(--theme-transition-timing),
+    box-shadow var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+/* Prevent transitions during initial page load */
+.no-transition * {
+  transition: none !important;
+}
+
+/* Theme-aware backgrounds for common elements */
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/* Enhanced card styling for better theme switching */
+.card {
+  background-color: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  border: 1px solid hsl(var(--border));
+}
+
+/* Button theme enhancements */
+.btn-primary {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+.btn-secondary {
+  background-color: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+}
+
+/* Input field theme enhancements */
+.input {
+  background-color: hsl(var(--input));
+  border: 1px solid hsl(--border);
+  color: hsl(var(--foreground));
+}
+
+.input:focus {
+  ring: 2px solid hsl(var(--ring));
+}
+
+/* Theme toggle animation */
+.theme-toggle {
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-toggle::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transition: left 0.5s ease-in-out;
+}
+
+.theme-toggle:hover::after {
+  left: 100%;
+}
+
+/* Dark mode specific overrides for better contrast */
+.dark {
+  /* Navigation and header improvements */
+  .bg-slate-900 {
+    background-color: hsl(15 15 17);
+  }
+
+  .bg-slate-800 {
+    background-color: hsl(18 18 20);
+  }
+
+  .bg-slate-700 {
+    background-color: hsl(21 21 23);
+  }
+
+  /* Text improvements */
+  .text-white {
+    color: hsl(0 0 98);
+  }
+
+  .text-slate-400 {
+    color: hsl(0 0 64);
+  }
+}
+
+/* Light mode specific overrides */
+.light {
+  /* Navigation and header improvements */
+  .bg-slate-900 {
+    background-color: hsl(210 20 14);
+  }
+
+  .bg-slate-800 {
+    background-color: hsl(217 19 27);
+  }
+
+  .bg-slate-700 {
+    background-color: hsl(215 25 35);
+  }
+
+  /* Text improvements for light mode */
+  .text-white {
+    color: hsl(0 0 9);
+  }
+
+  .text-slate-400 {
+    color: hsl(0 0 45);
+  }
+}
+
+/* Scroll bar theming */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--accent-foreground));
+}
+
+/* Print styles - force light theme */
+@media print {
+  * {
+    background: white !important;
+    color: black !important;
+    transition: none !important;
+  }
+}
+
+/* Animation for theme switch feedback */
+@keyframes theme-switch {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.theme-switching {
+  animation: theme-switch 0.3s ease-in-out;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
